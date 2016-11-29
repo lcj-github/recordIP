@@ -90,7 +90,7 @@ public class AllInOneServlet extends HttpServlet {
 		
 		out.writeUTF(pageBuf.toString());
 		
-		out.close();
+		out.close(); 
 
 	}
 	

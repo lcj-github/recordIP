@@ -5,6 +5,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -45,9 +46,9 @@ public class AllInOneServlet extends HttpServlet {
 			throws ServletException, IOException {
 		
 		Logger logger = Logger.getLogger("pay-log");
-		
 		// 2.Set response header
 		response.setContentType("text/html");
+		response.setCharacterEncoding("utf8");
 
 		// 3.Get useful info from TCP & HTTP header
 		Integer count = 0;
@@ -64,21 +65,38 @@ public class AllInOneServlet extends HttpServlet {
 
 		for (Entry<String, Integer> entry : addrset) {
 
-			pageBuf.append("<br>");
+			//pageBuf.append("<br>");
 			pageBuf.append( entry.getKey() + " ip access number is : "
 					+ entry.getValue());
 			pageBuf.append("<br>");			 
 		}
 		
+		//输出请求参数
+		Enumeration<String> en = request.getParameterNames();
+		while (en.hasMoreElements()) {
+			String paramName = (String) en.nextElement();			
+			pageBuf.append(paramName);
+			pageBuf.append("=");
+			pageBuf.append( request.getParameter(paramName));
+			pageBuf.append("<br>");
+		}
+		
+		
+		
 		logger.debug(pageBuf.toString());		
 
 		DataOutputStream out = new DataOutputStream(response.getOutputStream());
 		//out.writeUTF("<br>");
+		
 		out.writeUTF(pageBuf.toString());
 		
 		out.close();
 
 	}
+	
+	
+ 
+	
 
 	private String getIpAddr(HttpServletRequest request) {
 		String ipAddress = null;

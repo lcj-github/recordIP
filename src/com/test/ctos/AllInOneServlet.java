@@ -53,6 +53,9 @@ public class AllInOneServlet extends HttpServlet {
 		// 3.Get useful info from TCP & HTTP header
 		Integer count = 0;
 		String remoteAddr = getIpAddr(request);// 返回发出请求的客户机的主机名
+		
+		System.out.println("remoteAddr===" +remoteAddr);
+		
 		if (addrMap.containsKey(remoteAddr)) {
 			count = addrMap.get(remoteAddr);
 		}
@@ -62,13 +65,14 @@ public class AllInOneServlet extends HttpServlet {
 
 		addrset = addrMap.entrySet();
 		pageBuf = new StringBuffer(); 
+		 
 
 		for (Entry<String, Integer> entry : addrset) {
 
-			//pageBuf.append("<br>");
-			pageBuf.append( entry.getKey() + " ip access number is : "
+			 
+			pageBuf.append(entry.getKey() + " ip access number is : "
 					+ entry.getValue());
-			pageBuf.append("<br>");			 
+			 		 
 		}
 		
 		//输出请求参数

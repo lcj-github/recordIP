@@ -5,6 +5,8 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
@@ -23,6 +25,7 @@ public class AllInOneServlet extends HttpServlet {
 	Map<String, Integer> addrMap = null;
 	Set<Entry<String, Integer>> addrset = null;
 	StringBuffer pageBuf = null;
+	SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss:SSS");
 
 	public AllInOneServlet() {
 
@@ -54,8 +57,6 @@ public class AllInOneServlet extends HttpServlet {
 		Integer count = 0;
 		String remoteAddr = getIpAddr(request);// 返回发出请求的客户机的主机名
 		
-		System.out.println("remoteAddr===" +remoteAddr);
-		
 		if (addrMap.containsKey(remoteAddr)) {
 			count = addrMap.get(remoteAddr);
 		}
@@ -67,13 +68,14 @@ public class AllInOneServlet extends HttpServlet {
 		pageBuf = new StringBuffer(); 
 		 
 
-		for (Entry<String, Integer> entry : addrset) {
-
-			 
-			pageBuf.append(entry.getKey() + " ip access number is : "
-					+ entry.getValue());
-			 		 
-		}
+		/*for (Entry<String, Integer> entry : addrset) {			 
+			pageBuf.append(entry.getKey() + " ip access numberz : "
+					+ entry.getValue());			 		 
+		}*/
+		
+		//输出请求串url发出的地址
+		String formatStr =formatter.format(new Date());
+		pageBuf.append("请求地址为:"+remoteAddr+"操作时间:"+formatStr);		
 		
 		//输出请求参数
 		Enumeration<String> en = request.getParameterNames();
@@ -85,15 +87,15 @@ public class AllInOneServlet extends HttpServlet {
 			pageBuf.append("<br>");
 		}
 		
+		//logger.debug(pageBuf.toString());			
 		
-		
-		logger.debug(pageBuf.toString());		
+		System.out.println(pageBuf.toString());
 
 		DataOutputStream out = new DataOutputStream(response.getOutputStream());
 		//out.writeUTF("<br>");
 		
 		out.writeUTF(pageBuf.toString());
-		
+		pageBuf = null;
 		out.close(); 
 
 	}

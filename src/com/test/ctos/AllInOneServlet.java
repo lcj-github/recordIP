@@ -55,7 +55,7 @@ public class AllInOneServlet extends HttpServlet {
 
 		// 3.Get useful info from TCP & HTTP header
 		Integer count = 0;
-		String remoteAddr = getIpAddr(request);// ·µ»Ø·¢³öÇëÇóµÄ¿Í»§»úµÄÖ÷»úÃû
+		String remoteAddr = getIpAddr(request);// è¿”å›å‘å‡ºè¯·æ±‚çš„å®¢æˆ·æœºçš„ä¸»æœºå
 		
 		if (addrMap.containsKey(remoteAddr)) {
 			count = addrMap.get(remoteAddr);
@@ -73,11 +73,11 @@ public class AllInOneServlet extends HttpServlet {
 					+ entry.getValue());			 		 
 		}*/
 		
-		//Êä³öÇëÇó´®url·¢³öµÄµØÖ·
+		//è¾“å‡ºè¯·æ±‚ä¸²urlå‘å‡ºçš„åœ°å€
 		String formatStr =formatter.format(new Date());
-		pageBuf.append("ÇëÇóµØÖ·Îª:"+remoteAddr+"²Ù×÷Ê±¼ä:"+formatStr);		
+		pageBuf.append("è¯·æ±‚åœ°å€ä¸º:"+remoteAddr+"æ“ä½œæ—¶é—´:"+formatStr);		
 		
-		//Êä³öÇëÇó²ÎÊı
+		//è¾“å‡ºè¯·æ±‚å‚æ•°
 		Enumeration<String> en = request.getParameterNames();
 		while (en.hasMoreElements()) {
 			String paramName = (String) en.nextElement();			
@@ -120,7 +120,7 @@ public class AllInOneServlet extends HttpServlet {
 				|| "unknown".equalsIgnoreCase(ipAddress)) {
 			ipAddress = request.getRemoteAddr();
 			if (ipAddress.equals("127.0.0.1") || ipAddress.equals("0:0:0:0:0:0:0:1")) {
-				// ¸ù¾İÍø¿¨È¡±¾»úÅäÖÃµÄIP
+				// æ ¹æ®ç½‘å¡å–æœ¬æœºé…ç½®çš„IP
 				InetAddress inet = null;
 				try {
 					inet = InetAddress.getLocalHost();
@@ -132,9 +132,9 @@ public class AllInOneServlet extends HttpServlet {
 
 		}
 
-		// ¶ÔÓÚÍ¨¹ı¶à¸ö´úÀíµÄÇé¿ö£¬µÚÒ»¸öIPÎª¿Í»§¶ËÕæÊµIP,¶à¸öIP°´ÕÕ','·Ö¸î
-		if (ipAddress != null && ipAddress.length() > 15) { // "***.***.***.***".length()
-															// = 15
+		// å¯¹äºé€šè¿‡å¤šä¸ªä»£ç†çš„æƒ…å†µï¼Œç¬¬ä¸€ä¸ªIPä¸ºå®¢æˆ·ç«¯çœŸå®IP,å¤šä¸ªIPæŒ‰ç…§','åˆ†å‰²
+		if (ipAddress != null && ipAddress.length() > 15) {
+														
 			if (ipAddress.indexOf(",") > 0) {
 				ipAddress = ipAddress.substring(0, ipAddress.indexOf(","));
 			}

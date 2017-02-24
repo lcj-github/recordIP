@@ -33,6 +33,18 @@
     
     
     
+    <!-- JFreeChart -->
+  	<servlet>
+        <servlet-name>DisplayChart</servlet-name>
+        <servlet-class>com.test.ctos.DisplayChart</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DisplayChart</servlet-name>
+        <url-pattern>/displayChart</url-pattern>
+    </servlet-mapping>
+    
+    
+    
     
     
 </web-app>

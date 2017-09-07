@@ -42,6 +42,7 @@ public class AllInOneServlet extends HttpServlet {
 
 		addrMap = null;
 		addrset = null;
+		pageBuf = null;
 	}
 
 	@Override
@@ -95,7 +96,7 @@ public class AllInOneServlet extends HttpServlet {
 		//out.writeUTF("<br>");
 		
 		out.writeUTF(pageBuf.toString());
-		pageBuf = null;
+		
 		out.close(); 
 
 	}

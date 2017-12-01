@@ -67,6 +67,18 @@ public class MyWebSocket {
 				continue;
 			}
 		}
+		
+		
+		/*	    
+	    //方式一：发送文本消息给客户端    
+	    session.getBasicRemote().sendText("Server response text message");
+	    //方式二：发送二进制数据给客户端
+	  	session.getBasicRemote().sendBinary(ByteBuffer.wrap(mesString.getBytes()));    
+	    */
+		
+		
+		
+		
 	}
 
 	/**
